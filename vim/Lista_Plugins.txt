@@ -1,0 +1,12 @@
+Lista de Plugins no Vim
+
+---> Pathogen
+---> CTags 
+---> Delimitate
+---> Emmet-vim
+---> NerdTree
+---> SuperTab
+---> *tlib_vim ??
+---> *vim-addon-mw-utils ??
+---> vim-airline
+---> vim-airline-themes        
