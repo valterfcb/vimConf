@@ -1,0 +1,206 @@
+"__________________________________________________________________________________________________
+"                                                NEERDTREE
+
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+highlight VertSplit cterm=none gui=none
+
+nmap ,t :NERDTreeToggle<CR>
+"__________________________________________________________________________________________________
+"                                                SYNTASTIC
+
+"__________________________________________________________________________________________________
+"                                                BROWSER-REFRESH
+
+"-para dar basta ir á 'tab' e definir para reload auto.
+"__________________________________________________________________________________________________
+"                         			 SUPERTAB:
+"-para por a funcionar:
+"                       - Download do file --> supertab.vmb
+"                       - Abrir o ficheiro no vim
+"                       - Executar o command ----> :so % 
+"__________________________________________________________________________________________________
+"                                                VIM-PLUG:
+
+"__________________________________________________________________________________________________
+"						 EMMET:
+
+let g:user_emmet_mode='a'    "enable all function in all mode.
+let g:user_emmet_expandabbr_key='<c-\>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+"__________________________________________________________________________________________________
+"                                                VIM-JAVASCRIPT:
+
+"SuperTab
+"__________________________________________________________________________________________________
+"                                                AIRLINE:
+
+let g:airline_theme='dark'
+let g:airline#extensions#tabline#enabled = 1 
+
+"__________________________________________________________________________________________________
+"                                                Pathogen:
+
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+"__________________________________________________________________________________________________
+"                                                CONFIGS DO VIDEO:
+
+" enter the current millenium
+set nocompatible
+
+"enable syntax and plugins(for netrw)
+syntax enable
+filetype plugin on
+
+"**************************************************************************************************
+"                       >>>>>FIND FILES<<<<<
+
+"search down into subfolders
+"providde tab-completion for all file-related tasks
+set path+=**
+
+"Display all matching files when we tab complete
+set wildmenu
+
+"--------------------------------------------------------------------------------------------------
+"NOW WE CAN:
+"-hit tab to :find by partial match (exe: |:find ind 'TAB'|-->index.html)
+"-use * to make it fuzzy (exe: |:find *html 'TAB'|---> to all files with html)
+
+"THINGS TO CONSIDER
+"- :b lets you autocomplete any open buffer (exe: |:b ind 'TAB'|-->index.html)
+"--------------------------------------------------------------------------------------------------
+
+"**************************************************************************************************
+"                       >>>>>TAG JUMPING<<<<<
+
+"create the 'tags' file (may need to install ctags first)
+command! MakeTags !ctags -R .
+
+"--------------------------------------------------------------------------------------------------
+"-Use ^] to jump to tag under cursor
+"-Use g^] to global tags
+"-Use ^t to jump back tag
+
+":ts --> shows the list tags
+":tn --> goes to the next tag in that list
+":tp --> goes to the previous tag in that list
+":tf --> goes to the first tag in that list
+":tl --> goes to the last tag in that list
+
+":tag 'function_name'
+"--------------------------------------------------------------------------------------------------
+
+"**************************************************************************************************
+"                       >>>>>AUTOCOMPLITE<<<<<
+
+"--------------------------------------------------------------------------------------------------
+"the good stuff is documented in |ins-completion|
+
+"HIGHLIGHTS:
+" - ^x^n for just this file
+" - ^x^f for filenames (works with our paht trick!)
+" - ^n for anything specified by the 'complete' option
+
+"NOW WE CAN:
+"-use ^n and ^p to go back and forth in the suggestion list
+"--------------------------------------------------------------------------------------------------
+
+"**************************************************************************************************
+"                       >>>>>CURSOR LINE<<<<<
+
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=darkblue guibg=darkred guifg=white
+
+"**************************************************************************************************
+"                       >>>>>SHOW CMD<<<<<
+
+set showcmd
+
+"**************************************************************************************************
+
+"__________________________________________________________________________________________________
+"                                                MY CONFIGS:
+
+
+"**************************************************************************************************
+"                                          >>>>>SHOW LINE NUMBER<<<<<
+
+set number
+set relativenumber
+highlight LineNr ctermfg=grey 
+"--------------------------------------------------------------------------------------------------
+"-Usar exe( 50j para baixo && 10k para cima)
+"**************************************************************************************************
+
+"**************************************************************************************************
+"                                               SET CUROSR MIDDLE 
+
+set scrolloff=25
+"**************************************************************************************************
+
+"**************************************************************************************************
+"                                               MODE NO DELAY
+
+set timeoutlen=1000 ttimeoutlen=0
+"**************************************************************************************************
+"__________________________________________________________________________________________________
+
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"                                                MY KKEY MAP ZONE:
+
+
+"NAVEGAR NAS TABS DOS BUFFERS
+
+nmap ,bn :bp<CR>
+"-Navegar para TRÁS em modo Normal introduzir ',bn'
+nmap ,bm :bn<CR>
+"-Navegar para FRENTE em modo Normal introduzir ',bm'
+
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"                                                COMMANDS TEST ZONE:
+
+
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"                                                MY COMMANDS:
+
+
+"************************************************************************************************** 
+"                       >>>>>COMMAND CREATE NEW FILE/TEMPLATE<<<<<
+
+command! -complete=file -nargs=* Temp call Temp(<f-args>) | :wq
+function! Temp(...)
+	exe "tabe /home/jokerbraga/Desktop/" . fnameescape(a:1)
+	exe "-1read /home/jokerbraga/Desktop/Templates.Vim/" . fnameescape(a:2)
+endfunction
+
+"--------------------------------------------------------------------------------------------------
+"CRIA NOVOS FICHEIRO A PARTIR DE TEMPLATES
+
+"-PARA USAR: exe( :Temp styles/main.css css/main.css)
+"--------------------------------------------------------------------------------------------------
+
+"**************************************************************************************************
+"                       >>>>>COMMAND CREATE NEW FOLDER<<<<<
+
+command! -complete=file -nargs=1 Nfolder  :! mkdir <args> 
+
+"--------------------------------------------------------------------------------------------------
+"Cria uma Nova Pasta
+
+"-PARA USAR: exe( :Nfolder /Desktop/pasta
+"--------------------------------------------------------------------------------------------------
+"**************************************************************************************************
+"                                               COMAND OPEN WEB PAGE
+
+command! -complete=file Webpage :!firefox % 
+
+"                                                END MY COMMANDS:
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
